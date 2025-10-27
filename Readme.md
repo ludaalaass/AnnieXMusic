@@ -202,9 +202,6 @@ API_URL=             # Optional - External API url for music Download
 ### Step 1: Update & Install Packages
 sudo apt update && sudo apt upgrade -y
 sudo apt install git curl python3-pip python3-venv ffmpeg -y
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt install -y nodejs
-npm install -g npm
 
 ### Step 2: Clone Repo
 git clone https://github.com/CertifiedDevloper/AnnieXMusic
@@ -287,9 +284,6 @@ docker rmi anniexmusic      # Remove image
   </a>
   <a href="https://t.me/CertifiedCoder">
     <img src="https://img.shields.io/badge/Contact_Owner-Telegram-4CAF50?style=for-the-badge&logo=telegram&logoColor=white" />
-  </a>
-  <a href="https://youtube.com/@rajnisha3">
-    <img src="https://img.shields.io/badge/Subscribe-YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" />
   </a>
   <a href="https://instagram.com/rajnishthegreat">
     <img src="https://img.shields.io/badge/Follow-Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />

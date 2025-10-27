@@ -1,34 +1,36 @@
-# 🔐 Security Policy
+# sᴇᴄᴜʀɪᴛʏ ᴘᴏʟɪᴄʏ
 
-## ✅ Supported Versions
+## sᴜᴘᴘᴏʀᴛᴇᴅ ᴠᴇʀsɪᴏɴs
 
-The following versions of the project are actively maintained with security updates:
+ʙᴇʟᴏᴡ ᴛᴀʙʟᴇ shows ᴡʜɪᴄʜ ᴠᴇʀsɪᴏɴ ɪs sᴛᴀʙʟᴇ ᴀɴᴅ sᴇᴄᴜʀɪᴛʏ ᴜᴘᴅᴀᴛᴇᴅ ᴀɴᴅ ᴡʜɪᴄʜ ɪs ɴᴏᴛ
+| ᴠᴇʀsɪᴏɴ | sᴜᴘᴘᴏʀᴛᴇᴅ          |
+| -------| ------------------|
+| 1.0   | :white_check_mark: |
 
-| Version | Supported |
-| ------- | --------- |
-| v1.0    | ❌         |
-| v2.0    | ✅         |
 
----
+## ʀᴇᴘᴏʀᴛɪɴɢ ᴀ ᴠᴜʟɴᴇʀᴀʙɪʟɪᴛʏ
 
-## 📣 Reporting a Vulnerability
+ɪғ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʀᴇᴘᴏʀᴛ ᴀ ᴍᴀᴊᴏʀ ᴏʀ ᴍɪɴᴏʀ ᴠᴜʟɴᴇʀᴀʙɪʟɪᴛʏ ғʀᴏᴍ ᴏᴜʀ ᴘʀᴏᴊᴇᴄᴛ?
 
-If you find a security vulnerability, please follow the steps below to report it responsibly:
+ғɪʀsᴛ ᴏғ ᴀʟʟ ɪɴғᴏʀᴍ ᴛʜᴇ ᴏʀɪɢɪɴᴀʟ ᴄʀᴇᴀᴛᴏʀ ᴏғ ᴛʜᴇ ᴘᴀᴄᴋᴀɢᴇ ғʀᴏᴍ PyPi
+ᴀɴᴅ ᴛʜᴇɴ ᴍᴀᴋᴇ ᴀ ɪssᴜᴇ ɪɴ ᴏᴜʀ ᴘʀᴏᴊᴇᴄᴛ.
 
-### 1. Contact Us Privately
+## ᴀɴɴɪᴇ x ᴍᴜsɪᴄ ᴏᴡɴᴇʀ
+- [ɢɪᴛʜᴜʙ](https://github.com/CertifiedDevloper)
+- [ᴛᴇʟᴇɢʀᴀᴍ](https://t.me/CertifiedCoder)
+- [ sᴜᴘᴘᴏʀᴛ](https://t.me/CertifiedCoders)
 
-* Email your findings to: [rajnishmishraaa1@gmail.com](mailto:rajnishmishraaa1@gmail.com)
-* **Do not** open a public issue on GitHub to report security vulnerabilities.
+## ɪɴғᴏ 
+ᴛʜɪs ɪs **ᴀɴɴɪᴇ x ᴍᴜsɪᴄ** , ᴏᴩᴇɴ sᴏᴜʀᴄᴇ ᴛᴇʟᴇɢʀᴀᴍ ᴠᴄ ᴍᴜsɪᴄ ᴘʟᴀʏᴇʀ ʙᴏᴛ ᴡɪᴛʜ sᴏᴍᴇ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴀᴇᴍᴇɴᴛ ғᴇᴀᴛᴜʀᴇs.
 
-### 2. What You Can Expect
+ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ ᴛʜᴇ ʜᴇʟᴩ ᴏғ : [ᴘʏᴛɢᴄᴀʟʟs](https://github.com/pytgcalls/pytgcalls), 
+[ᴩʏʀᴏɢʀᴀᴍ](https://github.com/KurimuzonAkuma/pyrogram), 
+[ʏᴛᴅʟᴘ](https://github.com/yt-dlp/yt-dlp), 
+ᴀɴᴅ ᴜsɪɴɢ [ᴍᴏɴɢᴏ](https://cloud.mongodb.com) ᴀs ᴅᴀᴛᴀʙᴀsᴇ.
 
-* We will acknowledge your report within **72 hours**.
-* Our team will work with you to verify and resolve the issue.
-* A security patch will be issued within **30 days**, depending on the severity.
+ʜᴇʀᴇ ɪs ᴍʏ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ : [ɢɪᴛʜᴜʙ-ʟɪɴᴋ](https://github.com/CertifiedDevloper/AnnieXMusic)
 
-### 3. Responsible Disclosure Guidelines
 
-* Please keep the details of the vulnerability confidential until a fix is released.
-* We encourage and support responsible disclosure to ensure user safety.
+ᴀᴠᴀ ʀᴏʙᴏᴛ ɪs ʟɪᴄᴇɴsᴇᴅ ᴜɴᴅᴇʀ ᴛʜᴇ [ᴍɪᴛ ʟɪᴄᴇɴsᴇ](https://github.com/CertifiedDevloper/AnnieXMusic/blob/master/LICENSE).
 
----
+© 2024 - 2025 [ᴅᴇᴠ](https://github.com/CertifiedDevloper), ᴀʟʟ ʀɪɢʜᴛs ʀᴇsᴇʀᴠᴇᴅ
