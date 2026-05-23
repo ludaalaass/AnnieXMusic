@@ -11,7 +11,7 @@ API_ID = int(getenv("API_ID", 37700))
 API_HASH = getenv("API_HASH", "db7e06fe13be0c06e426e7906d7c6")
 BOT_TOKEN = getenv("BOT_TOKEN")
 
-OWNER_ID = int(getenv("OWNER_ID", 8490079044))
+OWNER_ID = int(getenv("OWNER_ID", 6638833328))
 OWNER_USERNAME = getenv("OWNER_USERNAME", "@sahilxalone")
 BOT_USERNAME = getenv("BOT_USERNAME", "@NXMUSICroBOT")
 BOT_NAME = getenv("BOT_NAME", "˹𝐍𝐱 ꭙ ᴍᴜ𝐬ɪᴄ˼ ♪")
@@ -39,7 +39,7 @@ API_KEY = getenv("API_KEY")        # optional
 DEEP_API = getenv("DEEP_API")      # optional
 
 # ── DeepAI (legacy) API config ────────────────────────────────────────────────
-API_KEY = getenv("API_KEY", "Put Your On key")
+API_KEY = getenv("API_KEY", "PUT")
 API_BASE_URL = getenv("API_BASE_URL", "http://34.208.39.84:8000")
 
 # ── HuggingFace API config ─────────────────────────────────────────────────────
@@ -59,13 +59,13 @@ API_KEY = getenv("API_KEY", None) # youtube song api key, generate free key or b
 # (Fixed line — previously causing SyntaxError)
 # -------------------------------------------------------------------
 
-UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/Vishalisback00/VishalXmusic.git")
+UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://t.me/+3XobX_t--Bk4YmM1")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "Master")
 GIT_TOKEN = getenv("GIT_TOKEN")  # needed if repo is private
 
 # ── Support links ──────────────────────────────────────────────────────────────
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/+IcW2eMiU9T9lNjVl")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/anniemusicsupport")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/OSINTNXERA")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/+3XobX_t--Bk4YmM1")
 
 # ── Assistant auto-leave ───────────────────────────────────────────────────────
 AUTO_LEAVING_ASSISTANT = False
