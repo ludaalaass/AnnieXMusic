@@ -132,9 +132,9 @@ async def start_pm(client, message: Message, _):
     )
 
     try:
-        photos = await client.get_profile_photos(message.from_user.id, limit=1)
+        photos = await app.get_profile_photos(message.from_user.id, limit=1)
         if photos:
-            profile_pic = await client.download_media(photos[0].file_id, in_memory=True)
+            profile_pic = await app.download_media(photos[0].file_id, in_memory=True)
             profile_pic.seek(0)
             await message.reply_photo(
                 photo=profile_pic,
