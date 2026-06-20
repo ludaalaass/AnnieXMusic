@@ -131,13 +131,34 @@ async def start_pm(client, message: Message, _):
         served_chats_coro, served_users_coro, stats_coro
     )
 
-    await message.reply_video(
-        random.choice(START_VIDS),
-        caption=random.choice(AYUV).format(
-            message.from_user.mention, app.mention, UP, DISK, CPU, RAM, len(served_users), len(served_chats)
-        ),
-        reply_markup=InlineKeyboardMarkup(out),
-    )
+    try:
+        photos = await client.get_profile_photos(message.from_user.id, limit=1)
+        if photos:
+            profile_pic = await client.download_media(photos[0].file_id, in_memory=True)
+            profile_pic.seek(0)
+            await message.reply_photo(
+                photo=profile_pic,
+                caption=random.choice(AYUV).format(
+                    message.from_user.mention, app.mention, UP, DISK, CPU, RAM, len(served_users), len(served_chats)
+                ),
+                reply_markup=InlineKeyboardMarkup(out),
+            )
+        else:
+            await message.reply_video(
+                random.choice(START_VIDS),
+                caption=random.choice(AYUV).format(
+                    message.from_user.mention, app.mention, UP, DISK, CPU, RAM, len(served_users), len(served_chats)
+                ),
+                reply_markup=InlineKeyboardMarkup(out),
+            )
+    except Exception:
+        await message.reply_video(
+            random.choice(START_VIDS),
+            caption=random.choice(AYUV).format(
+                message.from_user.mention, app.mention, UP, DISK, CPU, RAM, len(served_users), len(served_chats)
+            ),
+            reply_markup=InlineKeyboardMarkup(out),
+        )
 
     if await is_on_off(2):
         username = f"@{message.from_user.username}" if message.from_user.username else "(none)"
