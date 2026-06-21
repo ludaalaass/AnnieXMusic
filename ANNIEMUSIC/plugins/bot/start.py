@@ -135,7 +135,7 @@ async def start_pm(client, message: Message, _):
         photos = await app.get_profile_photos(message.from_user.id, limit=1)
       if photos:
     await message.reply_photo(
-        photo=photos[0].file_id,,
+        photo=photos[0].file_id,
                 caption=random.choice(AYUV).format(
                     message.from_user.mention, app.mention, UP, DISK, CPU, RAM, len(served_users), len(served_chats)
                 ),
