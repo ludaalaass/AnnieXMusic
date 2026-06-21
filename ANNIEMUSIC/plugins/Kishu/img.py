@@ -289,7 +289,7 @@ async def generate_image(_, m: Message):
             f"✨ {to_small_caps('gpt-5 mini vision generated image')} ✔\n\n"
             f"📝 {to_small_caps('prompt')}: `{prompt}`\n"
             f"⏱️ {to_small_caps('time')}: `{elapsed}s`\n\n"
-            f"⚡ {to_small_caps('powered by annie music bot')}"
+            f"⚡ {to_small_caps('powered by sahil music bot')}"
         ),
     )
 
