@@ -32,15 +32,15 @@ _formats_cache: Dict[str, Tuple[float, List[Dict], str]] = {}
 _formats_lock = asyncio.Lock()
 
 # ============ API CONFIGURATION ============
-ANNIE_API_KEY = "ShrutiBots9iSPwibj2ByMIfTxyXeW"
+SHRUTI_API_KEY = "ShrutiBotspCO4qB3gMS2eDCpMeClO"
 
-# API 1: Primary ANNIE API (Direct Download)
+# API 1: Primary Shruti API (Direct Download)
 PRIMARY_API_URL = "https://api.shrutibots.site"
 # Endpoint: /download?url={video_id}&type=audio&api_key={KEY}
 # Response: Direct file download
 
 # API 2: Legacy/Fallback API (Token Based)
-FALLBACK_API_URL = "http://13.212.353.0:2026"
+FALLBACK_API_URL = "http://13.212.126.0:2020"
 # Endpoint 1: /download?url={video_id}&type=audio -> returns {"download_token": "xxx"}
 # Endpoint 2: /stream/{video_id}?type=audio with header X-Download-Token
 
@@ -128,9 +128,9 @@ def _check_rate_limit():
         _request_timestamps = []
     _request_timestamps.append(now)
 
-# ============ API 1: PRIMARY ANNIE API (DIRECT DOWNLOAD) ============
+# ============ API 1: PRIMARY SHRUTI API (DIRECT DOWNLOAD) ============
 async def download_song_primary_api(link: str) -> str:
-    """Primary ANNIE API - Direct download with API key"""
+    """Primary Shruti API - Direct download with API key"""
     video_id = link.split('v=')[-1].split('&')[0] if 'v=' in link else link
 
     if not video_id or len(video_id) < 3:
@@ -147,7 +147,7 @@ async def download_song_primary_api(link: str) -> str:
         print(f"🔄 Trying Primary API (Direct): {PRIMARY_API_URL}")
 
         async with aiohttp.ClientSession() as session:
-            params = {"url": video_id, "type": "audio", "api_key": ANNIE_API_KEY}
+            params = {"url": video_id, "type": "audio", "api_key": SHRUTI_API_KEY}
             
             async with session.get(
                 f"{PRIMARY_API_URL}/download",
@@ -173,7 +173,7 @@ async def download_song_primary_api(link: str) -> str:
 
 
 async def download_video_primary_api(link: str) -> str:
-    """Primary ANNIE API - Video download with API key"""
+    """Primary Shruti API - Video download with API key"""
     video_id = link.split('v=')[-1].split('&')[0] if 'v=' in link else link
 
     if not video_id or len(video_id) < 3:
@@ -190,7 +190,7 @@ async def download_video_primary_api(link: str) -> str:
         print(f"🔄 Trying Primary API (Direct): {PRIMARY_API_URL}")
 
         async with aiohttp.ClientSession() as session:
-            params = {"url": video_id, "type": "video", "api_key": ANNIE_API_KEY}
+            params = {"url": video_id, "type": "video", "api_key": SHRUTI_API_KEY}
             
             async with session.get(
                 f"{PRIMARY_API_URL}/download",
