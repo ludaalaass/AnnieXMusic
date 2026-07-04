@@ -36,32 +36,32 @@ from ANNIEMUSIC.utils.permissions import extract_user_and_reason, mention, parse
 _DEF_MUTE_PERMS = ChatPermissions()
 
 _USAGES = {
-    "ban":    "/ban @user [reason] — or reply with /ban [reason]",
-    "unban":  "/unban @user [reason] — or reply with /unban [reason]",
-    "mute":   "/mute @user [reason] — or reply with /mute [reason]",
-    "unmute": "/unmute @user [reason] — or reply with /unmute [reason]",
-    "tmute":  "/tmute @user <time> [reason] — or reply with /tmute <time> [reason]",
-    "kick":   "/kick @user [reason] — or reply with /kick [reason]",
-    "dban":   "Reply to a user's message with /dban [reason]",
-    "sban":   "/sban @user — or reply with /sban",
-    "tban":   "/tban @user <time> [reason] — or reply with /tban <time> [reason]",
+    "ban":    "✨ /ban @user [reason] — ᴏʀ ʀᴇᴘʟʏ ᴡɪᴛʜ /ban [reason]",
+    "unban":  "🔄 /unban @user [reason] — ᴏʀ ʀᴇᴘʟʏ ᴡɪᴛʜ /unban [reason]",
+    "mute":   "🔇 /mute @user [reason] — ᴏʀ ʀᴇᴘʟʏ ᴡɪᴛʜ /mute [reason]",
+    "unmute": "🔊 /unmute @user [reason] — ᴏʀ ʀᴇᴘʟʏ ᴡɪᴛʜ /unmute [reason]",
+    "tmute":  "⏰ /tmute @user <time> [reason] — ᴏʀ ʀᴇᴘʟʏ ᴡɪᴛʜ /tmute <time> [reason]",
+    "kick":   "👢 /kick @user [reason] — ᴏʀ ʀᴇᴘʟʏ ᴡɪᴛʜ /kick [reason]",
+    "dban":   "🗑️ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴜsᴇʀ's ᴍᴇssᴀɢᴇ ᴡɪᴛʜ /dban [reason]",
+    "sban":   "🤫 /sban @user — ᴏʀ ʀᴇᴘʟʏ ᴡɪᴛʜ /sban",
+    "tban":   "⏱️ /tban @user <time> [reason] — ᴏʀ ʀᴇᴘʟʏ ᴡɪᴛʜ /tban <time> [reason]",
     "kickme": "/kickme — kick yourself from the group",
 }
 
 def _usage(cmd: str) -> str:
-    return _USAGES.get(cmd, "Invalid usage.")
+    return _USAGES.get(cmd, "❌ ɪɴᴠᴀʟɪᴅ ᴜsᴀɢᴇ.")
 
 def _format_success(action: str, msg: Message, uid: int, name: str, reason: Optional[str]) -> str:
     chat = msg.chat.title
     user_m  = mention(uid, name)
     admin_m = mention(msg.from_user.id, msg.from_user.first_name)
     text = (
-        f"» {action} ᴀ ᴜsᴇʀ ɪɴ {chat}\n"
-        f" ᴜsᴇʀ  : {user_m}\n"
-        f" ᴀᴅᴍɪɴ : {admin_m}"
+        f"✅ {action} ᴀ ᴜsᴇʀ ɪɴ {chat}\n"
+        f"👤 ᴜsᴇʀ  : {user_m}\n"
+        f"👑 ᴀᴅᴍɪɴ : {admin_m}"
     )
     if reason:
-        text += f"\nReason: {reason}"
+        text += f"\n📝 ʀᴇᴀsᴏɴ: {reason}"
     return text
 
 async def _get_member_safe(client, chat_id: int, user_id: int):
@@ -92,18 +92,18 @@ async def ban_cmd(client, message: Message):
 
     target = await _get_member_safe(client, message.chat.id, uid)
     if target and _is_admin_status(target.status):
-        return await message.reply_text("I cannot ban an admin or the group owner.")
+        return await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ ᴏʀ ᴛʜᴇ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ.")
 
     if target and target.status == enums.ChatMemberStatus.BANNED:
-        return await message.reply_text("User is already banned.")
+        return await message.reply_text("⚠️ ᴜsᴇʀ ɪs ᴀʟʀᴇᴀᴅʏ ʙᴀɴɴᴇᴅ.")
 
     try:
         await client.ban_chat_member(message.chat.id, uid)
-        await message.reply_text(_format_success("Ban", message, uid, name, reason))
+        await message.reply_text(_format_success("ʙᴀɴɴᴇᴅ 🔨", message, uid, name, reason))
     except ChatAdminRequired:
-        await message.reply_text("I need ban permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴘᴇʀᴍɪssɪᴏɴ.")
     except UserAdminInvalid:
-        await message.reply_text("I cannot ban an admin.")
+        await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ.")
 
 # ────────────────────────────────────────────────────────────
 # /unban
@@ -119,13 +119,13 @@ async def unban_cmd(client, message: Message):
         return
     mem = await _get_member_safe(client, message.chat.id, uid)
     if not mem or mem.status != enums.ChatMemberStatus.BANNED:
-        return await message.reply_text("User is not banned.")
+        return await message.reply_text("❓ ᴜsᴇʀ ɪs ɴᴏᴛ ʙᴀɴɴᴇᴅ.")
 
     try:
         await client.unban_chat_member(message.chat.id, uid)
-        await message.reply_text(_format_success("Unban", message, uid, name, reason))
+        await message.reply_text(_format_success("ᴜɴʙᴀɴɴᴇᴅ 🔓", message, uid, name, reason))
     except ChatAdminRequired:
-        await message.reply_text("I need unban permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴘᴇʀᴍɪssɪᴏɴ.")
 
 # ────────────────────────────────────────────────────────────
 # /mute
@@ -142,18 +142,18 @@ async def mute_cmd(client, message: Message):
 
     target = await _get_member_safe(client, message.chat.id, uid)
     if target and _is_admin_status(target.status):
-        return await message.reply_text("I cannot mute an admin or the group owner.")
+        return await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ᴍᴜᴛᴇ ᴀɴ ᴀᴅᴍɪɴ ᴏʀ ᴛʜᴇ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ.")
 
     if target and target.status == enums.ChatMemberStatus.RESTRICTED and target.permissions == _DEF_MUTE_PERMS:
-        return await message.reply_text("User is already muted.")
+        return await message.reply_text("🔇 ᴜsᴇʀ ɪs ᴀʟʀᴇᴀᴅʏ ᴍᴜᴛᴇᴅ.")
 
     try:
         await client.restrict_chat_member(message.chat.id, uid, _DEF_MUTE_PERMS)
-        await message.reply_text(_format_success("Mute", message, uid, name, reason))
+        await message.reply_text(_format_success("ᴍᴜᴛᴇᴅ 🤐", message, uid, name, reason))
     except ChatAdminRequired:
-        await message.reply_text("I need mute permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴘᴇʀᴍɪssɪᴏɴ.")
     except UserAdminInvalid:
-        await message.reply_text("I cannot mute an admin.")
+        await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ᴍᴜᴛᴇ ᴀɴ ᴀᴅᴍɪɴ.")
 
 # ────────────────────────────────────────────────────────────
 # /unmute
@@ -169,7 +169,7 @@ async def unmute_cmd(client, message: Message):
         return
     mem = await _get_member_safe(client, message.chat.id, uid)
     if not mem or mem.status != enums.ChatMemberStatus.RESTRICTED:
-        return await message.reply_text("User is not muted.")
+        return await message.reply_text("🔊 ᴜsᴇʀ ɪs ɴᴏᴛ ᴍᴜᴛᴇᴅ.")
 
     perms = ChatPermissions(
         can_send_messages=True,
@@ -181,9 +181,9 @@ async def unmute_cmd(client, message: Message):
     )
     try:
         await client.restrict_chat_member(message.chat.id, uid, perms)
-        await message.reply_text(_format_success("Unmute", message, uid, name, reason))
+        await message.reply_text(_format_success("ᴜɴᴍᴜᴛᴇᴅ 🎤", message, uid, name, reason))
     except ChatAdminRequired:
-        await message.reply_text("I need unmute permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴘᴇʀᴍɪssɪᴏɴ.")
 
 # ────────────────────────────────────────────────────────────
 # /tmute
@@ -202,26 +202,26 @@ async def tmute_cmd(client, message: Message):
     else:
         user = await client.get_users(message.command[1])
         if not user:
-            return await message.reply_text("I can’t find that user.")
+            return await message.reply_text("🔍 ɪ ᴄᴀɴ'ᴛ ғɪɴᴅ ᴛʜᴀᴛ ᴜsᴇʀ.")
         time_arg= message.command[2]
         reason  = message.text.partition(time_arg)[2].strip()
 
     target = await _get_member_safe(client, message.chat.id, user.id)
     if target and _is_admin_status(target.status):
-        return await message.reply_text("I cannot mute an admin or the group owner.")
+        return await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ᴍᴜᴛᴇ ᴀɴ ᴀᴅᴍɪɴ ᴏʀ ᴛʜᴇ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ.")
 
     delta = parse_time(time_arg)
     if not delta:
-        return await message.reply_text("Invalid time format. Use s/m/h/d suffix.")
+        return await message.reply_text("⏰ ɪɴᴠᴀʟɪᴅ ᴛɪᴍᴇ ғᴏʀᴍᴀᴛ. ᴜsᴇ s/m/h/d sᴜғғɪx.")
 
     until = dt.datetime.now(dt.timezone.utc) + delta
     try:
         await client.restrict_chat_member(message.chat.id, user.id, _DEF_MUTE_PERMS, until_date=until)
-        await message.reply_text(_format_success(f"Mute for {time_arg}", message, user.id, user.first_name, reason))
+        await message.reply_text(_format_success(f"ᴍᴜᴛᴇᴅ ғᴏʀ {time_arg} ⏲️", message, user.id, user.first_name, reason))
     except ChatAdminRequired:
-        await message.reply_text("I need mute permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴘᴇʀᴍɪssɪᴏɴ.")
     except UserAdminInvalid:
-        await message.reply_text("I cannot mute an admin.")
+        await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ᴍᴜᴛᴇ ᴀɴ ᴀᴅᴍɪɴ.")
 
 # ────────────────────────────────────────────────────────────
 # /kick
@@ -238,17 +238,17 @@ async def kick_cmd(client, message: Message):
 
     target = await _get_member_safe(client, message.chat.id, uid)
     if target and _is_admin_status(target.status):
-        return await message.reply_text("I cannot kick an admin or the group owner.")
+        return await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ᴋɪᴄᴋ ᴀɴ ᴀᴅᴍɪɴ ᴏʀ ᴛʜᴇ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ.")
 
     try:
         await client.ban_chat_member(message.chat.id, uid)
         await asyncio.sleep(2)
         await client.unban_chat_member(message.chat.id, uid)
-        await message.reply_text(_format_success("Kick", message, uid, name, reason))
+        await message.reply_text(_format_success("ᴋɪᴄᴋᴇᴅ 👢", message, uid, name, reason))
     except ChatAdminRequired:
-        await message.reply_text("I need ban permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴘᴇʀᴍɪssɪᴏɴ.")
     except UserAdminInvalid:
-        await message.reply_text("I cannot kick an admin.")
+        await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ᴋɪᴄᴋ ᴀɴ ᴀᴅᴍɪɴ.")
 
 # ────────────────────────────────────────────────────────────
 # /dban
@@ -264,16 +264,16 @@ async def dban_cmd(client, message: Message):
 
     target = await _get_member_safe(client, message.chat.id, user.id)
     if target and _is_admin_status(target.status):
-        return await message.reply_text("I cannot ban an admin or the group owner.")
+        return await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ ᴏʀ ᴛʜᴇ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ.")
 
     try:
         await client.ban_chat_member(message.chat.id, user.id)
         await message.reply_to_message.delete()
-        await message.reply_text(_format_success("Ban", message, user.id, user.first_name, reason))
+        await message.reply_text(_format_success("ʙᴀɴɴᴇᴅ 🗑️", message, user.id, user.first_name, reason))
     except ChatAdminRequired:
-        await message.reply_text("I need ban & delete permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴏʀ ᴄᴀɴ_ᴅᴇʟᴇᴛᴇ_ᴍᴇssᴀɢᴇs ᴘᴇʀᴍɪssɪᴏɴ.")
     except UserAdminInvalid:
-        await message.reply_text("I cannot ban an admin.")
+        await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ.")
 
 # ────────────────────────────────────────────────────────────
 # /sban
@@ -290,17 +290,16 @@ async def sban_cmd(client, message: Message):
 
     target = await _get_member_safe(client, message.chat.id, uid)
     if target and _is_admin_status(target.status):
-        return await message.reply_text("I cannot ban an admin or the group owner.")
+        return await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ ᴏʀ ᴛʜᴇ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ.")
 
     try:
         await client.ban_chat_member(message.chat.id, uid)
         await message.delete()  # silent
     except ChatAdminRequired:
-        await message.reply_text("I need ban permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴘᴇʀᴍɪssɪᴏɴ.")
     except UserAdminInvalid:
-        await message.reply_text("I cannot ban an admin.")
-
-# ────────────────────────────────────────────────────────────
+        await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ.")
+#────────────────────────────────────────────────────────────
 # /kickme
 # ────────────────────────────────────────────────────────────
 @app.on_message(filters.command("kickme"))
@@ -308,24 +307,43 @@ async def kickme_cmd(client, message: Message):
     if message.chat.type == enums.ChatType.PRIVATE:
         return
 
-    target = await _get_member_safe(client, message.chat.id, message.from_user.id)
-    if target and _is_admin_status(target.status):
-        return await message.reply_text("Nice try, boss 😅 I can’t kick admins or the owner.")
+    target = await _get_member_safe(
+        client,
+        message.chat.id,
+        message.from_user.id
+    )
 
-    bot_mem = await _get_bot_member(client, message.chat.id)
-    if not bot_mem or not getattr(bot_mem, "can_restrict_members", False):
-        return await message.reply_text("I need ban permissions to kick you. Ask an admin to enable it.")
+    if target and _is_admin_status(target.status):
+        return await message.reply_text(
+            "ʏᴏᴜ'ʀᴇ ᴛᴏᴏ ᴘᴏᴡᴇʀғᴜʟ ᴛᴏ ᴋɪᴄᴋ ʏᴏᴜʀsᴇʟғ. 👑"
+        )
 
     try:
-        await client.ban_chat_member(message.chat.id, message.from_user.id)
-        await asyncio.sleep(3)
-        await client.unban_chat_member(message.chat.id, message.from_user.id)
-        await message.reply_text("Kicked so hard, your ancestors felt it. 👟💥")
-    except ChatAdminRequired:
-        await message.reply_text("I need ban permissions.")
-    except UserAdminInvalid:
-        await message.reply_text("I can’t kick admins or the owner.")
+        await message.reply_text(
+            "ʏᴏᴜ ᴀsᴋᴇᴅ ғᴏʀ ɪᴛ — ɴᴏᴡ ɢᴇᴛ ᴏᴜᴛ. 🚪"
+        )
 
+        await client.ban_chat_member(
+            message.chat.id,
+            message.from_user.id
+        )
+
+        await asyncio.sleep(3)
+
+        await client.unban_chat_member(
+            message.chat.id,
+            message.from_user.id
+        )
+
+    except ChatAdminRequired:
+        await message.reply_text(
+            "ɪ ɴᴇᴇᴅ ʙᴀɴ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ᴋɪᴄᴋ ʏᴏᴜ."
+        )
+
+    except UserAdminInvalid:
+        await message.reply_text(
+            "ʏᴏᴜ'ʀᴇ ᴛᴏᴏ ᴘᴏᴡᴇʀғᴜʟ ᴛᴏ ᴋɪᴄᴋ ʏᴏᴜʀsᴇʟғ. 👑"
+        )
 # ────────────────────────────────────────────────────────────
 # /tban
 # ────────────────────────────────────────────────────────────
@@ -343,23 +361,23 @@ async def tban_cmd(client, message: Message):
     else:
         user = await client.get_users(message.command[1])
         if not user:
-            return await message.reply_text("I can’t find that user.")
+            return await message.reply_text("🔍 ɪ ᴄᴀɴ'ᴛ ғɪɴᴅ ᴛʜᴀᴛ ᴜsᴇʀ.")
         time_arg= message.command[2]
         reason  = message.text.partition(time_arg)[2].strip()
 
     target = await _get_member_safe(client, message.chat.id, user.id)
     if target and _is_admin_status(target.status):
-        return await message.reply_text("I cannot ban an admin or the group owner.")
+        return await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ ᴏʀ ᴛʜᴇ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ.")
 
     delta = parse_time(time_arg)
     if not delta:
-        return await message.reply_text("Invalid time format. Use s/m/h/d suffix.")
+        return await message.reply_text("⏰ ɪɴᴠᴀʟɪᴅ ᴛɪᴍᴇ ғᴏʀᴍᴀᴛ. ᴜsᴇ s/m/h/d sᴜғғɪx.")
 
     until = dt.datetime.now(dt.timezone.utc) + delta
     try:
         await client.ban_chat_member(message.chat.id, user.id, until_date=until)
-        await message.reply_text(_format_success(f"Ban for {time_arg}", message, user.id, user.first_name, reason))
+        await message.reply_text(_format_success(f"ʙᴀɴɴᴇᴅ ғᴏʀ {time_arg} ⏱️", message, user.id, user.first_name, reason))
     except ChatAdminRequired:
-        await message.reply_text("I need ban permissions.")
+        await message.reply_text("❌ ʏᴏᴜ ʟᴀᴄᴋ ᴄᴀɴ_ʀᴇsᴛʀɪᴄᴛ_ᴍᴇᴍʙᴇʀs ᴘᴇʀᴍɪssɪᴏɴ.")
     except UserAdminInvalid:
-        await message.reply_text("I cannot ban an admin.")
+        await message.reply_text("❌ ɪ ᴄᴀɴɴᴏᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ.")
