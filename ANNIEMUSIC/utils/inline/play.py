@@ -1,8 +1,30 @@
 import time
 from pyrogram.types import InlineKeyboardButton
 from ANNIEMUSIC.utils.formatters import time_to_seconds
+from ANNIEMUSIC.core.mongo import mongodb
+from ANNIEMUSIC.utils.colour import styled_button
 
 LAST_UPDATE_TIME = {}
+
+# ===== AUTOPLAY DB =====
+autoplay_db = mongodb.autoplay
+
+
+# 🔥 SAFE GET (NO ERROR)
+async def get_autoplay(chat_id):
+    try:
+        data = await autoplay_db.find_one({"chat_id": chat_id})
+        return data["status"] if data else False
+    except:
+        return False
+
+
+# 🔥 SAFE TIME CONVERTER
+def safe_time_to_seconds(t):
+    try:
+        return time_to_seconds(t)
+    except:
+        return 0
 
 
 def track_markup(_, videoid, user_id, channel, fplay):
@@ -35,48 +57,119 @@ def should_update_progress(chat_id):
     return False
 
 
+# 🔥 PROGRESS BAR - HEART WAVE STYLE
 def generate_progress_bar(played_sec, duration_sec):
-    if duration_sec == 0:
-        percentage = 0
+    if duration_sec <= 0:
+        return "〜♡〜"
+
+    percentage = min((played_sec / duration_sec) * 100, 100)
+
+    # Button width ke hisab se dynamic length
+    if duration_sec >= 3600:       # 1 hour+
+        bar_length = 1
+    elif duration_sec >= 1800:     # 30 min+
+        bar_length = 3
     else:
-        percentage = min((played_sec / duration_sec) * 100, 100)
+        bar_length = 8
 
-    bar_length = 8
-    filled = int(round(bar_length * percentage / 70))
-    return "▰" * filled + "▱" * (bar_length - filled)
+    filled = int(bar_length * percentage / 100)
+    empty = bar_length - filled
 
-
-def control_buttons(_, chat_id):
-    return [[
-        InlineKeyboardButton(text="▷", callback_data=f"ADMIN Resume|{chat_id}"),
-        InlineKeyboardButton(text="II", callback_data=f"ADMIN Pause|{chat_id}"),
-        InlineKeyboardButton(text="↻", callback_data=f"ADMIN Replay|{chat_id}"),
-        InlineKeyboardButton(text="‣‣I", callback_data=f"ADMIN Skip|{chat_id}"),
-        InlineKeyboardButton(text="▢", callback_data=f"ADMIN Stop|{chat_id}"),
-    ]]
+    return "〜" * filled + "♡" + "〜" * empty
 
 
-def stream_markup_timer(_, chat_id, played, dur):
+# 🔥 ORIGINAL CONTROL BUTTONS (for pyrogram InlineKeyboardMarkup)
+def control_buttons_sync(_, chat_id):
+    return [
+        [
+            InlineKeyboardButton("▷", callback_data=f"ADMIN Resume|{chat_id}"),
+            InlineKeyboardButton("II", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton("↻", callback_data=f"ADMIN Replay|{chat_id}"),
+            InlineKeyboardButton("‣‣I", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton("▢", callback_data=f"ADMIN Stop|{chat_id}"),
+        ],
+        [
+            InlineKeyboardButton("« 20s", callback_data=f"ADMIN 5|{chat_id}"),
+            InlineKeyboardButton("⚙️", callback_data="open_settings"),
+            InlineKeyboardButton("20s »", callback_data=f"ADMIN 6|{chat_id}"),
+        ]
+    ]
+
+
+# 🔥 COLOURED CONTROL BUTTONS (for Bot API HTTP - colour support)
+def control_buttons_colored(chat_id):
+    return [
+        [
+            styled_button("▷", callback_data=f"ADMIN Resume|{chat_id}", style="success"),
+            styled_button("II", callback_data=f"ADMIN Pause|{chat_id}", style="success"),
+            styled_button("↻", callback_data=f"ADMIN Replay|{chat_id}", style="success"),
+            styled_button("‣‣I", callback_data=f"ADMIN Skip|{chat_id}", style="success"),
+            styled_button("▢", callback_data=f"ADMIN Stop|{chat_id}", style="success"),
+        ],
+        [
+            styled_button("« 20s", callback_data=f"ADMIN 5|{chat_id}", style="primary"),
+            styled_button("⚙️", callback_data="open_settings", style="primary"),
+            styled_button("20s »", callback_data=f"ADMIN 6|{chat_id}", style="primary"),
+        ]
+    ]
+
+
+# 🔥 COLOURED TIMER UI
+def stream_markup_timer_colored(chat_id, played, dur):
     if not should_update_progress(chat_id):
-        return None
+        return control_buttons_colored(chat_id)
 
-    played_sec = time_to_seconds(played)
-    duration_sec = time_to_seconds(dur)
+    played_sec = safe_time_to_seconds(played)
+    duration_sec = safe_time_to_seconds(dur)
+
     bar = generate_progress_bar(played_sec, duration_sec)
 
     return (
-        [[InlineKeyboardButton(text=f"{played} {bar} {dur}", callback_data="GetTimer")]] +
-        control_buttons(_, chat_id) +
-        [[InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")]]
+        [[styled_button(f"{played} {bar} {dur}", callback_data="GetTimer", style="primary")]]
+        + control_buttons_colored(chat_id)
+        + [[styled_button("✘ ᴄʟᴏꜱᴇ ✘", callback_data="close", style="danger")]]
     )
 
 
+# 🔥 COLOURED MAIN PLAYER
+def stream_markup_colored(chat_id):
+    return (
+        control_buttons_colored(chat_id)
+        + [[styled_button("✘ ᴄʟᴏꜱᴇ ✘", callback_data="close", style="danger")]]
+    )
+
+
+# ═══════════════════════════════════════════════════════════
+# BELOW: ORIGINAL PYROGRAM FUNCTIONS (fallback / non-colored)
+# ═══════════════════════════════════════════════════════════
+
+# 🔥 TIMER UI (pyrogram fallback)
+def stream_markup_timer(_, chat_id, played, dur):
+    if not should_update_progress(chat_id):
+        return control_buttons_sync(_, chat_id)
+
+    played_sec = safe_time_to_seconds(played)
+    duration_sec = safe_time_to_seconds(dur)
+
+    bar = generate_progress_bar(played_sec, duration_sec)
+
+    return (
+        [[InlineKeyboardButton(text=f"{played} {bar} {dur}", callback_data="GetTimer")]]
+        + control_buttons_sync(_, chat_id)
+        + [[InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")]]
+    )
+
+
+# 🔥 MAIN PLAYER (pyrogram fallback)
 def stream_markup(_, chat_id):
-    return control_buttons(_, chat_id) + [[InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")]]
+    return (
+        control_buttons_sync(_, chat_id)
+        + [[InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")]]
+    )
 
 
 def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
-    buttons = [
+    return [
         [
             InlineKeyboardButton(
                 text=_["P_B_1"],
@@ -95,7 +188,6 @@ def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
         ],
     ]
 
-    return buttons
 
 def livestream_markup(_, videoid, user_id, mode, channel, fplay):
     return [
