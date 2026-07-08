@@ -38,6 +38,8 @@ from ANNIEMUSIC.utils.database import (
 from ANNIEMUSIC.utils.decorators import ActualAdminCB, languageCB
 from ANNIEMUSIC.utils.formatters import seconds_to_min
 from ANNIEMUSIC.utils.inline import close_markup, stream_markup, stream_markup_timer
+from ANNIEMUSIC.utils.inline.play import stream_markup_colored, stream_markup_timer_colored
+from ANNIEMUSIC.utils.colour import send_photo_colored, edit_reply_markup_colored
 from ANNIEMUSIC.utils.stream.autoclear import auto_clean
 from ANNIEMUSIC.utils.thumbnails import get_thumb
 
@@ -386,9 +388,9 @@ async def handle_seek(callback: CallbackQuery, _, chat_id: int, command: str, us
     if "index_" in file_path or "live_" in file_path:
         return await callback.answer(_["admin_22"], show_alert=True)
     duration_played = int(playing[0]["played"])
-    duration_to_skip = 10 if int(command) in [1, 2] else 30
+    duration_to_skip = 10 if int(command) in [1, 2] else 30 if int(command) in [3, 4] else 20
     duration = playing[0]["dur"]
-    if int(command) in [1, 3]:
+    if int(command) in [1, 3, 5]:
         if (duration_played - duration_to_skip) <= 10:
             bet = seconds_to_min(duration_played)
             return await callback.answer(
@@ -409,10 +411,12 @@ async def handle_seek(callback: CallbackQuery, _, chat_id: int, command: str, us
 
     await callback.answer()
     mystic = await callback.message.reply_text(_["admin_24"])
+
     if "vid_" in file_path:
         n, file_path = await YouTube.video(playing[0]["vidid"], True)
         if n == 0:
             return await mystic.edit_text(_["admin_22"])
+
     try:
         await JARVIS.seek_stream(
             chat_id,
@@ -423,12 +427,25 @@ async def handle_seek(callback: CallbackQuery, _, chat_id: int, command: str, us
         )
     except Exception:
         return await mystic.edit_text(_["admin_26"])
-    if int(command) in [1, 3]:
+
+    if int(command) in [1, 3, 5]:
         db[chat_id][0]["played"] -= duration_to_skip
     else:
         db[chat_id][0]["played"] += duration_to_skip
-    seek_message = _["admin_25"].format(seconds_to_min(to_seek))
-    await mystic.edit_text(f"{seek_message}\n\nᴄʜᴀɴɢᴇs ᴅᴏɴᴇ ʙʏ : {user_mention} !")
+
+    seek_message = _["admin_25"].format(
+        seconds_to_min(to_seek),
+        user_mention,
+    )
+
+    await mystic.edit_text(seek_message)
+
+    await asyncio.sleep(3)
+
+    try:
+        await mystic.delete()
+    except Exception:
+        pass
 
 
 async def markup_timer():
@@ -452,6 +469,22 @@ async def markup_timer():
                     if checker[chat_id][mystic.id] is False:
                         continue
                 try:
+                    # Try colored buttons via Bot API HTTP
+                    colored_buttons = stream_markup_timer_colored(
+                        chat_id,
+                        seconds_to_min(playing[0]["played"]),
+                        playing[0]["dur"],
+                    )
+                    result = await edit_reply_markup_colored(
+                        chat_id, mystic.id, colored_buttons
+                    )
+                    if result:
+                        continue
+                except Exception:
+                    pass
+
+                # Fallback to pyrogram method
+                try:
                     language = await get_lang(chat_id)
                     _lang = get_string(language)
                 except Exception:
@@ -468,6 +501,7 @@ async def markup_timer():
                     continue
             except Exception:
                 continue
+
 
 asyncio.create_task(markup_timer())
 
