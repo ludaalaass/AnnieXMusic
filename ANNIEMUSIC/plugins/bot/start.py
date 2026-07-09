@@ -26,21 +26,21 @@ from ANNIEMUSIC.utils.inline.start import private_panel, start_panel
 from config import BANNED_USERS
 from strings import get_string
 
-# ðŸ”¥ Love, Kiss, Cute stickers - alag alag type ke (all working)
+# 🔥 Love, Kiss, Cute stickers - alag alag type ke (all working)
 STICKERS = [
-    # â¤ï¸ Love stickers
+    # ❤️ Love stickers
     "CAACAgUAAxkBAAEQI1RlTLnRAy4h9lOS6jgS5FYsQoruOAAC1gMAAg6ryVcldUr_lhPexzME",
     "CAACAgQAAxkBAAMraaaBHm27-Wy2uQoptU3WZAAB6j3PAALEFQACIPCZUR1h3KoW6nItHgQ",
     "CAACAgQAAxkBAAMtaaaBKyjqLW8aBukB-vtOy-pUCxwAAoIOAAIF9AFSd_QCdbkZVqAeBA",
     "CAACAgQAAxkBAAMvaaaBNyAKbOtk05em_J8gQTmqotsAAhELAAIbGgABUuUNZ1V7LfMMHgQ",
     "CAACAgQAAxkBAAMxaaaBTZjH9A31Qdrb_xgKnrd4700AArgaAAJLO-hR8MN1DY1xe2ceBA",
 
-    # ðŸ’‹ Kiss stickers
+    # 💋 Kiss stickers
     "CAACAgQAAxkBAAM5aaaB7A7JfXbtkO7b8ubX6_IjDdIAAhoVAAKRIKFRpathP0j9IIYeBA",
     "CAACAgUAAxkBAAEQI2FlTLpR8P8P8P8P8P8P8P8P8P8P8QACDwADyvhHAAHLh_6L3bL3bA",
     "CAACAgUAAxkBAAEQI2hlTLqJ8P8P8P8P8P8P8P8P8P8P8QACFgADyvhHAAHLh_6L3bL3bA",
 
-    # ðŸ¥° Cute stickers
+    # 🥰 Cute stickers
     "CAACAgQAAxkBAAMzaaaBUYNDr2RENDvdHTkz5tg-lVcAAmkaAAIIeUlRllAUMDa5YOoeBA",
     "CAACAgQAAxkBAAM7aaaB-elXM9UEYY4OIo4eTCIbgigAAuUVAALryRlQRN37BBGYPgYeBA",
     "CAACAgQAAxkBAAM_aaaCCjmuL6EkqSBKpYbYzK3xKCcAAqYTAAK9jHlQ6vzt6mbH8-ceBA",
@@ -48,8 +48,8 @@ STICKERS = [
     "CAACAgUAAxkBAAEQI2VlTLpx8P8P8P8P8P8P8P8P8P8P8QACEwADyvhHAAHLh_6L3bL3bA",
 ]
 
-# ðŸ”¥ Sirf wo reactions jo Telegram 100% support karta hai
-REACTIONS = ["â¤ï¸", "ðŸ”¥", "ðŸ¥°", "ðŸ˜", "ðŸ˜˜", "ðŸ‘", "ðŸ‘", "ðŸŽ‰", "âœ¨", "â­ï¸", "ðŸŒˆ", "ðŸŽµ", "ðŸŽ¶", "ðŸ’", "ðŸ’–", "ðŸ’—", "ðŸ’“", "ðŸ’ž", "ðŸ’•", "ðŸ’‹"]
+# 🔥 Sirf wo reactions jo Telegram 100% support karta hai
+REACTIONS = ["❤️", "🔥", "🥰", "😍", "😘", "👍", "👏", "🎉", "✨", "⭐️", "🌈", "🎵", "🎶", "💝", "💖", "💗", "💓", "💞", "💕", "💋"]
 
 async def delete_message_after_delay(message: Message, delay: int):
     await asyncio.sleep(delay)
@@ -81,13 +81,13 @@ async def start_pm(client, message: Message, _):
     except:
         pass
     
-    # ðŸ”¥ PEHLE REACTION BHEJO - PRIVATE MEIN HAR BAAR
+    # 🔥 PEHLE REACTION BHEJO - PRIVATE MEIN HAR BAAR
     try:
         reaction_emoji = random.choice(REACTIONS)
         await message.react(reaction_emoji)
     except Exception:
         try:
-            await message.react("â¤ï¸")
+            await message.react("❤️")
         except:
             pass
     
@@ -118,11 +118,11 @@ async def start_pm(client, message: Message, _):
                 username = f"@{message.from_user.username}" if message.from_user.username else "None"
                 return await app.send_message(
                     chat_id=config.LOGGER_ID,
-                    text=f"{message.from_user.mention} á´Šá´œsá´› sá´›á´€Ê€á´›á´‡á´… á´›Êœá´‡ Ê™á´á´› á´›á´ á´„Êœá´‡á´„á´‹ <b>sá´œá´…á´ÊŸÉªsá´›</b>.\n\n<b>á´œsá´‡Ê€ Éªá´… :</b> <code>{message.from_user.id}</code>\n<b>á´œsá´‡Ê€É´á´€á´á´‡ :</b> {username}",
+                    text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>sᴜᴅᴏʟɪsᴛ</b>.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> {username}",
                 )
             return
         if name[0:3] == "inf":
-            m = await message.reply_text("ðŸ”Ž")
+            m = await message.reply_text("🔎")
             query = (str(name)).replace("info_", "", 1)
             query = f"https://www.youtube.com/watch?v={query}"
             results = VideosSearch(query, limit=1)
@@ -131,7 +131,7 @@ async def start_pm(client, message: Message, _):
                 duration = result["duration"]
                 views = result["viewCount"]["short"]
                 thumbnail = result["thumbnails"][0]["url"].split("?")[0]
-                # ðŸ”¥ FIX: Safe way to get channel link and name - KeyError 'link' se bachne ke liye
+                # 🔥 FIX: Safe way to get channel link and name - KeyError 'link' se bachne ke liye
                 channellink = result["channel"].get("link", "https://youtube.com")
                 channel = result["channel"].get("name", "YouTube Channel")
                 link = result["link"]
@@ -158,19 +158,19 @@ async def start_pm(client, message: Message, _):
                 username = f"@{message.from_user.username}" if message.from_user.username else "None"
                 return await app.send_message(
                     chat_id=config.LOGGER_ID,
-                    text=f"{message.from_user.mention} á´Šá´œsá´› sá´›á´€Ê€á´›á´‡á´… á´›Êœá´‡ Ê™á´á´› á´›á´ á´„Êœá´‡á´„á´‹ <b>á´›Ê€á´€á´„á´‹ ÉªÉ´Ò“á´Ê€á´á´€á´›Éªá´É´</b>.\n\n<b>á´œsá´‡Ê€ Éªá´… :</b> <code>{message.from_user.id}</code>\n<b>á´œsá´‡Ê€É´á´€á´á´‡ :</b> {username}",
+                    text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>ᴛʀᴀᴄᴋ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b>.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> {username}",
                 )
     else:
         # Airbeats.py style animation - PRIVATE CHAT ONLY
         try:
             # Welcome animation
             welcome_msgs = [
-                "ð–ðžð¥ðœð¨ð¦ðž ððšð›ð² ê¨„ï¸Ž {}.. â£ï¸",
-                "ð–ðžð¥ðœð¨ð¦ðž ððšð›ð² ê¨„ {}.. ðŸ¥³",
-                "ð–ðžð¥ðœð¨ð¦ðž ððšð›ð² ê¨„ {}.. ðŸ’¥",
-                "ð–ðžð¥ðœð¨ð¦ðž ððšð›ð² ê¨„ {}.. ðŸ¤©",
-                "ð–ðžð¥ðœð¨ð¦ðž ððšð›ð² ê¨„ {}.. ðŸ’Œ",
-                "ð–ðžð¥ðœð¨ð¦ðž ððšð›ð² ê¨„ {}.. ðŸ’ž",
+                "𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ︎ {}.. ❣️",
+                "𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 🥳",
+                "𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 💥",
+                "𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 🤩",
+                "𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 💌",
+                "𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 💞",
             ]
             
             lol = await message.reply_text(welcome_msgs[0].format(message.from_user.mention))
@@ -181,18 +181,18 @@ async def start_pm(client, message: Message, _):
             
             # Starting animation
             start_msgs = [
-                "**âš¡ï¸Ñ•**",
-                "âš¡Ñ•Ñ‚",        
-                "**âš¡Ñ•Ñ‚Î±**",
-                "**âš¡Ñ•Ñ‚Î±Ñ**",
-                "**âš¡Ñ•Ñ‚Î±ÑÑ‚**",
-                "**âš¡Ñ•Ñ‚Î±ÑÑ‚Î¹**",
-                "**âš¡Ñ•Ñ‚Î±ÑÑ‚Î¹Ð¸**",
-                "**âš¡Ñ•Ñ‚Î±ÑÑ‚Î¹Ð¸g**",
-                "**âš¡Ñ•Ñ‚Î±ÑÑ‚Î¹Ð¸g.**",
-                "**âš¡Ñ•Ñ‚Î±ÑÑ‚Î¹Ð¸g....**",
-                "**âš¡Ñ•Ñ‚Î±ÑÑ‚Î¹Ð¸g.**",
-                "**âš¡Ñ•Ñ‚Î±ÑÑ‚Î¹Ð¸g....**",
+                "**⚡️ѕ**",
+                "⚡ѕт",        
+                "**⚡ѕтα**",
+                "**⚡ѕтαя**",
+                "**⚡ѕтαят**",
+                "**⚡ѕтαятι**",
+                "**⚡ѕтαятιи**",
+                "**⚡ѕтαятιиg**",
+                "**⚡ѕтαятιиg.**",
+                "**⚡ѕтαятιиg....**",
+                "**⚡ѕтαятιиg.**",
+                "**⚡ѕтαятιиg....**",
             ]
             
             lols = await message.reply_text(start_msgs[0])
@@ -201,7 +201,7 @@ async def start_pm(client, message: Message, _):
                 await lols.edit_text(msg)
             await lols.delete()
             
-            # ðŸ”¥ STICKER PHIR BHEJO
+            # 🔥 STICKER PHIR BHEJO
             try:
                 sticker_msg = await message.reply_sticker(random.choice(STICKERS))
                 asyncio.create_task(delete_message_after_delay(sticker_msg, 3))
@@ -236,19 +236,19 @@ async def start_pm(client, message: Message, _):
             username = f"@{message.from_user.username}" if message.from_user.username else "None"
             await app.send_message(
                 chat_id=config.LOGGER_ID,
-                text=f"{message.from_user.mention} á´Šá´œsá´› sá´›á´€Ê€á´›á´‡á´… á´›Êœá´‡ Ê™á´á´›.\n\n<b>á´œsá´‡Ê€ Éªá´… :</b> <code>{message.from_user.id}</code>\n<b>á´œsá´‡Ê€É´á´€á´á´‡ :</b> {username}",
+                text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> {username}",
             )
 
 @app.on_message(filters.command(["start"]) & filters.group & ~BANNED_USERS)
 @LanguageStart
 async def start_gp(client, message: Message, _):
-    # ðŸ”¥ PEHLE REACTION BHEJO - GROUP MEIN HAR BAAR
+    # 🔥 PEHLE REACTION BHEJO - GROUP MEIN HAR BAAR
     try:
         reaction_emoji = random.choice(REACTIONS)
         await message.react(reaction_emoji)
     except Exception:
         try:
-            await message.react("â¤ï¸")
+            await message.react("❤️")
         except:
             pass
     
@@ -268,7 +268,7 @@ async def start_gp(client, message: Message, _):
     
     chat_photo = userss_photo if userss_photo != "assets/nodp.png" else config.START_IMG_URL
     
-    # ðŸ”¥ STICKER PHIR BHEJO
+    # 🔥 STICKER PHIR BHEJO
     try:
         sticker_msg = await message.reply_sticker(random.choice(STICKERS))
         asyncio.create_task(delete_message_after_delay(sticker_msg, 3))
@@ -319,7 +319,7 @@ async def welcome(client, message: Message):
                     )
                     return await app.leave_chat(message.chat.id)
 
-                # ðŸ”¥ Random love/kiss/cute sticker for welcome
+                # 🔥 Random love/kiss/cute sticker for welcome
                 try:
                     await message.reply_sticker(random.choice(STICKERS))
                 except Exception:
