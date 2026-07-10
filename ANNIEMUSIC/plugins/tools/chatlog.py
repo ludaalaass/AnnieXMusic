@@ -12,11 +12,13 @@ BOT_INFO: Optional[types.User] = None
 BOT_ID: Optional[int] = None
 
 PHOTOS = [
-    "https://telegra.ph/file/3c9c23857075dcaea5892.jpg",
-    "https://telegra.ph/file/f4e58cd6133a033ecd749.jpg",
-    "https://telegra.ph/file/e4645653125f3fbe0ad70.jpg",
-    "https://telegra.ph/file/cd205021bf40f44ad78e4.jpg",
-    "https://telegra.ph/file/05144a16d058f9a7401e5.jpg",
+    "https://i.ibb.co/6J01bvkr/x.jpg",
+    "https://i.ibb.co/4wsGWD2V/x.jpg",
+    "https://i.ibb.co/0yH4zHML/x.jpg",
+    "https://i.ibb.co/0yH4zHML/x.jpg",
+    "https://i.ibb.co/7x5WYR1v/x.jpg",
+    "https://i.ibb.co/rfZML1rb/x.jpg",
+    "https://i.ibb.co/zvbKZZL/x.jpg",
 ]
 
 def _is_valid_url(url: Optional[str]) -> bool:
