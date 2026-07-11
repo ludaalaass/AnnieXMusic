@@ -181,6 +181,7 @@ async def start_nightmode():
                 chat,
                 photo="https://te.legra.ph/file/3e40a408286d4eda24191.jpg",
                 caption="🌙 **NightMode Active:**\n🚫 Media Restricted\n✏️ Text Allowed"
+                has_spoiler=True
             )
             await app.set_chat_permissions(chat, CLOSE_CHAT)
         except:
@@ -199,6 +200,7 @@ async def close_nightmode():
                 chat,
                 photo="https://i.ibb.co/Q3RtJqHs/x.jpg",
                 caption="☀️ 𝐃ᴀʏMᴏᴅᴇ 𝐀ᴄᴛɪᴠᴇ!\n🎉 Aʟʟ ᴍᴇssᴀɢᴇ ᴛʏᴘᴇs ᴀʟʟᴏᴡᴇᴅ!"
+                has_spoiler=True
             )
             await app.set_chat_permissions(chat, OPEN_CHAT)
         except:
