@@ -66,7 +66,8 @@ async def _nightmode(_, message: Message):
                 "✨ **NɪɢʜᴛMᴏᴅᴇ Cᴏɴᴛʀᴏʟ Pᴀɴᴇʟ** ✨\n\n"
                 "🌙 Enable/Disable NightMode for this group.\n"
                 "🕙 10 PM → 7 AM IST\n"
-                "🚫 Media/Links Restricted | ✏️ Text Allowed"
+                "🚫 Media/Links Restricted | ✏️ Text Allowed",
+                has_spoiler=True
             ),
             reply_markup=buttons
         )
