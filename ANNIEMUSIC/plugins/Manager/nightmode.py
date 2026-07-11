@@ -179,7 +179,7 @@ async def start_nightmode():
         try:
             await app.send_photo(
                 chat,
-                photo="https://telegra.ph//file/06649d4d0bbf4285238ee.jpg",
+                photo="https://te.legra.ph/file/3e40a408286d4eda24191.jpg",
                 caption="🌙 **NightMode Active:**\n🚫 Media Restricted\n✏️ Text Allowed"
             )
             await app.set_chat_permissions(chat, CLOSE_CHAT)
@@ -197,7 +197,7 @@ async def close_nightmode():
         try:
             await app.send_photo(
                 chat,
-                photo="https://telegra.ph//file/14ec9c3ff42b59867040a.jpg",
+                photo="https://i.ibb.co/Q3RtJqHs/x.jpg",
                 caption="☀️ 𝐃ᴀʏMᴏᴅᴇ 𝐀ᴄᴛɪᴠᴇ!\n🎉 Aʟʟ ᴍᴇssᴀɢᴇ ᴛʏᴘᴇs ᴀʟʟᴏᴡᴇᴅ!"
             )
             await app.set_chat_permissions(chat, OPEN_CHAT)
