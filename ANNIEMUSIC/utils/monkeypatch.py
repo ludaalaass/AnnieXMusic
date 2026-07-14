@@ -1,7 +1,7 @@
 import functools
 from pyrogram import Client
 from pyrogram.enums import ParseMode
-from pyrogram.types import Message, CallbackQuery
+from pyrogram.types import Message
 from ANNIEMUSIC.utils.emoji_registry import (
     premiumize_emoji_html,
     is_emoji_send_error,
@@ -34,15 +34,5 @@ def _wrap(original):
 Message.reply_text = _wrap(Message.reply_text)
 Message.edit_text = _wrap(Message.edit_text)
 Message.reply_photo = _wrap(Message.reply_photo)
-Message.reply_video = _wrap(Message.reply_video)
-Message.reply_animation = _wrap(Message.reply_animation)
-Message.reply_audio = _wrap(Message.reply_audio)
-Message.edit_caption = _wrap(Message.edit_caption)
-
 Client.send_message = _wrap(Client.send_message)
 Client.edit_message_text = _wrap(Client.edit_message_text)
-Client.send_photo = _wrap(Client.send_photo)
-Client.send_video = _wrap(Client.send_video)
-Client.edit_message_caption = _wrap(Client.edit_message_caption)
-
-CallbackQuery.edit_message_text = _wrap(CallbackQuery.edit_message_text)
