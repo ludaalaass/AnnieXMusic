@@ -182,7 +182,7 @@ queue_5 : "ᴛʜᴇʀᴇ's ᴏɴʟʏ ᴏɴᴇ ǫᴜᴇᴜᴇᴅ ᴛʀᴀᴄᴋ �
 queue_6 : "<b>🕚 ᴅᴜʀᴀᴛɪᴏɴ :</b> ᴜɴᴋɴᴏᴡɴ ᴅᴜʀᴀᴛɪᴏɴ sᴛʀᴇᴀᴍ\n\nᴄʟɪᴄᴋ ᴏɴ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇᴅ ʟɪsᴛ."
 queue_7 : "\nᴄʟɪᴄᴋ ᴏɴ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇᴅ ʟɪsᴛ."
 queue_8 : "<b>{0} ᴘʟᴀʏᴇʀ</b>\n\n🎄 <b>sᴛʀᴇᴀᴍɪɴɢ :</b> {1}\n\n🔗 <b>sᴛʀᴇᴀᴍ ᴛʏᴘᴇ :</b> {2}\n🥀 <b>ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :</b> {3}\n{4}"
-stream_1: "<b>sᴛᴀʀᴛᴇᴅ sᴛʀᴇᴀᴍɪɴɢ |</b>\n<blockquote>⊱⋆⊳ <b>ᴛɪᴛʟᴇ :</b> <a href='{0}'>{1}</a>\n⊱⋆⊳ <b>ᴅᴜʀᴀᴛɪᴏɴ :</b> {2} ᴍɪɴᴜᴛᴇs\n <b>ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :</b> {3}</blockquote>\n<blockquote>⚡ <b>ᴍᴀᴅᴇ ʙʏ :</b> <a href='https://t.me/sahilxalone'>𝐒ᴀʜɪʟ</a></blockquote>"
+stream_1: "<b>sᴛᴀʀᴛᴇᴅ sᴛʀᴇᴀᴍɪɴɢ |</b>\n<blockquote>⊱⋆⊳ <b>ᴛɪᴛʟᴇ :</b> <a href='{0}'>{1}</a>\n⊱⋆⊳ <b>ᴅᴜʀᴀᴛɪᴏɴ :</b> {2} ᴍɪɴᴜᴛᴇs\n⊱⋆⊳ <b>ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :</b> {3}</blockquote>\n<blockquote>⚡ <b>ᴍᴀᴅᴇ ʙʏ :</b> <a href='https://t.me/sahilxalone'>𝐒ᴀʜɪʟ</a></blockquote>"
 stream_2: "<b>sᴛᴀʀᴛᴇᴅ sᴛʀᴇᴀᴍɪɴɢ |</b>\n<blockquote>⊱⋆⊳ <b>sᴛʀᴇᴀᴍ ᴛʏᴘᴇ :</b> ʟɪᴠᴇ sᴛʀᴇᴀᴍ [ᴜʀʟ]\n⊱⋆⊳ <b>ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :</b> {0}</blockquote>\n<blockquote>⚡ <b>ᴍᴀᴅᴇ ʙʏ ʏᴏᴜʀ ʟᴏᴠᴇ :</b> <a href='https://t.me/sahilxalone'>⏤͟͟͞͞𝗦ᴀ𝗛ɪ𝗟!</a></blockquote>"
 
 
