@@ -1,5 +1,6 @@
 from .channelplay import *
 from .database import *
+from . monkeypatch import *
 from .decorators import *
 from .extraction import *
 from .formatters import *
