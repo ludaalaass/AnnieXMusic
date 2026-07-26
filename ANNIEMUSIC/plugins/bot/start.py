@@ -3,7 +3,6 @@ import asyncio
 import random
 from pyrogram import filters
 from pyrogram.enums import ChatType
-from pyrogram.errors import ReplyMessageIdInvalid
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from py_yt import VideosSearch
 
@@ -34,12 +33,12 @@ STICKERS = [
     "CAACAgQAAxkBAAMtaaaBKyjqLW8aBukB-vtOy-pUCxwAAoIOAAIF9AFSd_QCdbkZVqAeBA",
     "CAACAgQAAxkBAAMvaaaBNyAKbOtk05em_J8gQTmqotsAAhELAAIbGgABUuUNZ1V7LfMMHgQ",
     "CAACAgQAAxkBAAMxaaaBTZjH9A31Qdrb_xgKnrd4700AArgaAAJLO-hR8MN1DY1xe2ceBA",
-
+    
     # 💋 Kiss stickers
     "CAACAgQAAxkBAAM5aaaB7A7JfXbtkO7b8ubX6_IjDdIAAhoVAAKRIKFRpathP0j9IIYeBA",
     "CAACAgUAAxkBAAEQI2FlTLpR8P8P8P8P8P8P8P8P8P8P8QACDwADyvhHAAHLh_6L3bL3bA",
     "CAACAgUAAxkBAAEQI2hlTLqJ8P8P8P8P8P8P8P8P8P8P8QACFgADyvhHAAHLh_6L3bL3bA",
-
+    
     # 🥰 Cute stickers
     "CAACAgQAAxkBAAMzaaaBUYNDr2RENDvdHTkz5tg-lVcAAmkaAAIIeUlRllAUMDa5YOoeBA",
     "CAACAgQAAxkBAAM7aaaB-elXM9UEYY4OIo4eTCIbgigAAuUVAALryRlQRN37BBGYPgYeBA",
@@ -57,21 +56,6 @@ async def delete_message_after_delay(message: Message, delay: int):
         await message.delete()
     except:
         pass
-
-
-async def safe_reply_photo(message: Message, client=None, **kwargs):
-    """
-    Send a photo as a reply; if the original message can no longer be
-    replied to (deleted / invalid reply id), fall back to a plain send
-    in the same chat so the bot never crashes with
-    REPLY_MESSAGE_ID_INVALID.
-    """
-    try:
-        return await message.reply_photo(**kwargs)
-    except ReplyMessageIdInvalid:
-        sender = client or message._client
-        return await sender.send_photo(chat_id=message.chat.id, **kwargs)
-
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
 @LanguageStart
@@ -105,9 +89,7 @@ async def start_pm(client, message: Message, _):
                 await message.reply_sticker(random.choice(STICKERS))
             except Exception:
                 pass
-            return await safe_reply_photo(
-                message,
-                client,
+            return await message.reply_photo(
                 photo=config.START_IMG_URL,
                 caption=_["help_1"].format(config.SUPPORT_CHAT),
                 reply_markup=keyboard,
@@ -223,9 +205,7 @@ async def start_pm(client, message: Message, _):
         out = private_panel(_)
         
         # Send start message with original caption
-        await safe_reply_photo(
-            message,
-            client,
+        await message.reply_photo(
             photo=chat_photo,
             caption=_["start_2"].format(message.from_user.mention, app.mention),
             reply_markup=InlineKeyboardMarkup(out),
@@ -279,9 +259,7 @@ async def start_gp(client, message: Message, _):
     uptime = int(time.time() - _boot_)
     
     # Direct reply without animation for groups
-    await safe_reply_photo(
-        message,
-        client,
+    await message.reply_photo(
         photo=chat_photo,
         caption=_["start_1"].format(app.mention, get_readable_time(uptime)),
         reply_markup=InlineKeyboardMarkup(out),
@@ -326,9 +304,7 @@ async def welcome(client, message: Message):
                     pass
 
                 out = start_panel(_)
-                await safe_reply_photo(
-                    message,
-                    client,
+                await message.reply_photo(
                     photo=config.START_IMG_URL,
                     caption=_["start_3"].format(
                         message.from_user.first_name,
