@@ -65,7 +65,7 @@ GIT_TOKEN = getenv("GIT_TOKEN")  # needed if repo is private
 
 # ── Support links ──────────────────────────────────────────────────────────────
 SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/AHANA_SUPPORTCHANNEL")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/+xza-B8vEYB9mMTE1")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/AHANA_SUPPORTCHANNEL")
 
 # ── Assistant auto-leave ───────────────────────────────────────────────────────
 AUTO_LEAVING_ASSISTANT = False
