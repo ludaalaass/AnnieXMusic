@@ -29,7 +29,7 @@ from ANNIEMUSIC import LOGGER
 # ==========================================================
 
 ARTISTBOTS_API_URL = "https://music.artistbots.workers.dev"
-ARTISTBOTS_API_KEY = "ArtistbotsvsazvRw"
+ARTISTBOTS_API_KEY = "ArtistbotsJPN9kQg"
 
 API_TIMEOUT = 300
 
